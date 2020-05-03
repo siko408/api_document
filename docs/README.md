@@ -4,4 +4,7 @@
 # /users
 > This route will give you all the names that are currently saved in the BuddiUp DB.
 # /totalmessages
-> This route will give you all the messages from all the group chats that have been sent from users
+> This route will give show  you all the messages added  up from  Every Chat in the DB
+# /<chatroomID>/messages
+> This route will give you the amount of  messages along with all  the messages in the Chat
+> Prior to  chatroomID given

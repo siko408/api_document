@@ -1,5 +1,5 @@
 require('dotenv').config()
-const app = require('./server.js')
+const app = require('../server.js')
 // const mongoose = require('mongoose')
 const chai = require('chai')
 const chaiHttp = require('chai-http')
@@ -13,17 +13,7 @@ const should = chai.should()
 chai.use(chaiHttp)
 
 
-// after((done) => {
-//   // required because https://github.com/Automattic/mongoose/issues/1251#issuecomment-65793092
-//   mongoose.models = {}
-//   mongoose.modelSchemas = {}
-//   mongoose.connection.close()
-//   done()
-// })
-// const SAMPLE_OBJECT_ID = 'aaaaaaaaaaaa' // 12 byte string
-// const SAMPLE_OBJECT_ID_2 = 'aaaaaaaaaaaa' // 12 byte string
-
-it('Should check all users', (done) => {
+it('Should send all users names', (done) => {
         // TODO: Complete this
 
         chai.request(app)
@@ -31,9 +21,19 @@ it('Should check all users', (done) => {
         .end((error, response) => {
             response.should.have.status(200);
                if (error) done(error);
-               expect(response.body).to.be.deep.equal({
-                   message:'200'
-               });
+               expect(response.body).to.be.a('object')
                done();
            });
     })
+
+it('Should  send all messages from all  Chats', (done) => {
+    /// Basic testing for each route for now
+    chai.request(app)
+    .get('/totalmessages')
+    .end((error, response) => {
+        response.should.have.status(200);
+           if (error) done(error);
+           expect(response.body).to.be.a('object')
+           done();
+       });
+})

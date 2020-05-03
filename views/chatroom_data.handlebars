@@ -1,0 +1,8 @@
+<h1>Room:{{chatroom_key}}</h1>
+<h3>Chatroom message length: {{chat_length}}</h3>
+<!-- <p>{{messages_list}}</p> -->
+<ul>
+ {{#each messages_list}}
+    <li> {{this}}</li>
+ {{/each}}
+</ul>

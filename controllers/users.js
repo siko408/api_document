@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   .then(response => response.json())
   .then(data => {
       console.log("Data", data)
-      data = JSON.stringify(data)  // Stringify it for now
+      data = JSON.stringify(data['users'])  // Stringify it for now
       res.render('home', {data})
   })
   .catch(err => {
