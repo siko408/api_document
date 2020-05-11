@@ -4,6 +4,8 @@ const fetch = require('node-fetch');
 
 
 router.get('/', (req, res) => {
+    var currentUser = req.user;
+
     fetch('http://127.0.0.1:8000/nodeAPI/users')//https://hackersandslackers.com/making-api-requests-with-nodejs/
   .then(response => response.json())
   .then(data => {
@@ -12,7 +14,7 @@ router.get('/', (req, res) => {
           sum += data['rooms'][key][0]
       }
       data = sum // Change this once sum has  its own page
-      res.render('home', {data})
+      res.render('home', {data, currentUser})
   })
   .catch(err => {
       console.log(err)
@@ -20,6 +22,8 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:chatroomID/messages', (req, res) => {
+    var currentUser = req.user;
+
     fetch('http://127.0.0.1:8000/nodeAPI/users')
   .then(response => response.json())
   .then(data => {
@@ -29,7 +33,7 @@ router.get('/:chatroomID/messages', (req, res) => {
         }
      var chat_length = JSON.stringify(data["rooms"][req.params.chatroomID][0])  // Stringify it for now
      const chatroom_key = req.params.chatroomID
-      res.render('chatroom_data', {chat_length, messages_list,  chatroom_key})
+      res.render('chatroom_data', {chat_length, messages_list,  chatroom_key, currentUser})
   })
   .catch(err => {
       console.log(err)

@@ -16,11 +16,14 @@
     "nodemon": "^2.0.2"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^5.3.0",
     "handlebars": "^4.7.6",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.7",
     "node-fetch": "^2.6.0",
     "routes": "^2.1.0"
