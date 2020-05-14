@@ -4,7 +4,25 @@ const fetch = require('node-fetch');
 const User = require('../models/user');
 
 
+router.post('/:username/delete', (req, res) => {
+    User.findByIdAndRemove(req.user._id).exec(function (err, user) {
+    if (err) { res.status(500).send(err); return;
+    }
+});
+res.clearCookie('nToken');
+res.render('delete_user', {})
+});
+router.post('/:username/update', (req, res) => {
+    User.findByIdAndUpdate(req.user._id, {$set:{username:'guest123'}}, {new: true}).exec(function (err, user) {
+    if (err) { res.status(500).send(err); return;
+    }
+});
+res.clearCookie('nToken');
+res.redirect('/users')
+});
+
 router.get('/', (req, res) => {
+    try{
     User.findById(req.user._id).lean()
                 .then(user => {
                     var currentUser = user.username
@@ -16,14 +34,16 @@ router.get('/', (req, res) => {
                       data = JSON.stringify(data['users'])  // Stringify it for now
                       res.render('home', {data, currentUser})
                   })
-                  .catch(err => {
-                      console.log(err)
-                  })
 
                 })
-                .catch(err => {
-                    console.log(err.message);
-                })
+}
+catch(err){
+    err = JSON.stringify(err)
+    res.render('home', {'err':'404'})
+    console.log(err)
+    // res.send({"message": 404})
+}
+
 
 })
 
@@ -32,6 +52,7 @@ router.get('/searchbar', (req, res) => {
 })
 router.post('/getuser', (req, res) => {
     console.log("This is what we are sending", req.body['input'])
+
     fetch('http://127.0.0.1:8000/nodeAPI/userSearch', { // Adding method type
     method: "POST",
 

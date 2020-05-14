@@ -6,3 +6,41 @@
     <li> {{this}}</li>
  {{/each}}
 </ul>
+<script type="text/javascript">
+var chatSocket = new WebSocket(  // This will be inside an ajax
+                     'ws://' + '127.0.0.1:8000' + // The location is where the the backend is being serivces, in this case its from my computer
+             '/ws/chatroom/' + '{{chatroom_key}}' + '/');
+
+function ping(){
+    chatSocket.send(JSON.stringify({
+        'message': "__pong__"
+    }));
+    tm = setTimeout(function(){
+
+    }, 5000);
+}
+
+function pong(){
+    clearTimeout(tm);
+}
+chatSocket.onopen = function(){
+    setInterval(ping, 30000)
+    console.log("opened")
+}
+chatSocket.onclose = function(){
+    console.log("Closed")
+}
+chatSocket.onmessage = function(e) {
+    var data = JSON.parse(e.data);
+    var message = data['message'];
+    console.log("RECEAVING A REQUEST")
+    if(data['message'] == '__pong__'){
+        pong();
+        return;
+    }
+    // For now the data will just refresh
+    location.reload()
+
+};
+
+</script>

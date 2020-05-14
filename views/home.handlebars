@@ -1,1 +1,22 @@
-<p>Hello {{data}}</p>
+<div id= 'errorcontainer'>
+<p id="message" value={{data}}> Sum of all messages from all rooms in the DB:{{data}}</p>
+<form  method='post' action="users/{{currentUser}}/delete">
+    <input type="submit">DELETE ACCOUNT</input>
+</form>
+<form  method='post' action="users/{{currentUser}}/update">
+    <input  id="username" type="text" placeholder="new username"></input>
+    <input type="submit"></input>
+</form>
+</div>
+
+
+<!-- <script>
+        error404 = $("#message").text();
+        console.log(error404)
+        if(error404 == '404'){
+            const h2 = document.createElement('h2')
+            h2.value = "YOU MUST BE LOGGED IN TO USE THE ROUTES"
+            document.getElementById("errorcontainer").appendChild(h2)
+        }
+
+</script> -->
