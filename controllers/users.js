@@ -13,7 +13,7 @@ res.clearCookie('nToken');
 res.render('delete_user', {})
 });
 router.post('/:username/update', (req, res) => {
-    User.findByIdAndUpdate(req.user._id, {$set:{username:'guest123'}}, {new: true}).exec(function (err, user) {
+    User.findByIdAndUpdate(req.user._id, {$set:{username:req.body['username']}}, {new: true}).exec(function (err, user) {
     if (err) { res.status(500).send(err); return;
     }
 });
