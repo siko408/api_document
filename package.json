@@ -25,7 +25,7 @@
     "handlebars": "^4.7.6",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.7",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "routes": "^2.1.0"
   }
 }
